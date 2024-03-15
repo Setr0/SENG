@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     bool isAttacking;
     public static bool isDying;
     // [SerializeField] GameObject playerPanel;
-    // [SerializeField] GameObject gameoverPanel;
+    [SerializeField] GameObject gameoverPanel;
     // [SerializeField] AudioSource jumpSound;
     // [SerializeField] AudioSource attackSound;
     // [SerializeField] AudioSource hittedSound;
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D collision in collisions)
         {
-            // collision.GetComponent<Enemy>().Die();
+            collision.GetComponent<Enemy>().Die();
         }
 
         // attackSound.Play();
@@ -191,10 +191,10 @@ public class PlayerController : MonoBehaviour
     void Gameover()
     {
         // backgroundMusic.Stop();
-        // Time.timeScale = 0;
+        Time.timeScale = 0;
         // gameoverMusic.Play();
         // playerPanel.SetActive(false);
-        // gameoverPanel.SetActive(true);
+        gameoverPanel.SetActive(true);
     }
 
     void OnDrawGizmos()

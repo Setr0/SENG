@@ -7,6 +7,5 @@ public class ApplicationController : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        Application.targetFrameRate = 100;
     }
 }
