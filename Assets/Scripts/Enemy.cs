@@ -206,7 +206,7 @@ public class Enemy : MonoBehaviour
         if (collision == null) return;
 
         if (collision.GetComponent<PlayerController>())
-            collision.GetComponent<PlayerController>().Die();
+            collision.GetComponent<PlayerController>().GetHitted();
 
         // if (attackSound != null) attackSound.Play();
     }

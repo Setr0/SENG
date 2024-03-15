@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
     Animator animator;
     [SerializeField] float speed = 7f;
     [SerializeField] float deathPositionY = -15f;
@@ -20,6 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform enemyCheck;
     [SerializeField] float attackRadius = 1f;
     [SerializeField] LayerMask enemyLayer;
+    [SerializeField] float health = 5;
+    [SerializeField] Slider healthSlider;
     bool isRunning;
     bool isJumping;
     bool isFalling;
@@ -36,7 +40,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        healthSlider.maxValue = health;
+
         gravity = new Vector2(0, -Physics2D.gravity.y);
         coyoteTimer = 0f;
         isRunning = false;
@@ -54,6 +62,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleAnimations();
+
+        healthSlider.value = health;
+
+        if (health <= 0 && !isDying) Die();
 
         if (isDying || isAttacking) return;
 
@@ -179,7 +191,20 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsFalling", isFalling);
     }
 
-    public void Die()
+    public void GetHitted()
+    {
+        health--;
+        spriteRenderer.color = Color.red;
+        StartCoroutine(GetHittedDelay());
+    }
+
+    IEnumerator GetHittedDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        spriteRenderer.color = Color.white;
+    }
+
+    void Die()
     {
         if (isDying) return;
 
