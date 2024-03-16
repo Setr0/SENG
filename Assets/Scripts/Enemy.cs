@@ -205,7 +205,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         isAttacking = false;
     }
 

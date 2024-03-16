@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
         isFalling = false;
         isAttacking = false;
-        canMove = true;
         isInvisible = false;
         isDying = false;
     }
