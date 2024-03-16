@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 770043749915262119}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -227,9 +227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  health: 3
   path: {fileID: 7008790475508330758}
   playerCheck: {fileID: 2224293520656136115}
-  radius: 0.5
+  radius: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 128

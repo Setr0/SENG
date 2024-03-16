@@ -196,9 +196,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  health: 3
   path: {fileID: 5999772014577511119}
   playerCheck: {fileID: 6187922498594262148}
-  radius: 0.5
+  radius: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -322,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 8530928573164510898}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4449997, y: -0.24900007, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping;
     bool isFalling;
     bool isAttacking;
+    public static bool canMove;
     public static bool isInvisible;
     public static bool isDying;
 
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
         isFalling = false;
         isAttacking = false;
+        canMove = true;
         isInvisible = false;
         isDying = false;
     }
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0 && !isDying) Die();
 
-        if (isDying || isAttacking) return;
+        if (isDying || isAttacking || !canMove) return;
 
         if (transform.position.y <= deathPositionY)
         {
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        if (isDying || isAttacking)
+        if (isDying || isAttacking || !canMove)
         {
             isRunning = false;
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -174,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D collision in collisions)
         {
-            collision.GetComponent<Enemy>().Die();
+            collision.GetComponent<Enemy>().GetHitted();
         }
 
         // attackSound.Play();
@@ -217,14 +219,23 @@ public class PlayerController : MonoBehaviour
     public void GetHitted()
     {
         health--;
-        spriteRenderer.color = Color.red;
-        StartCoroutine(GetHittedDelay());
+
+        if (health > 0)
+        {
+            animator.SetTrigger("Hit");
+            canMove = false;
+            StartCoroutine(GetHittedDelay());
+        }
+        else
+        {
+            Die();
+        }
     }
 
     IEnumerator GetHittedDelay()
     {
         yield return new WaitForSeconds(0.5f);
-        spriteRenderer.color = Color.white;
+        canMove = true;
     }
 
     void Die()

@@ -6,8 +6,10 @@ public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator animator;
+
     Transform player;
     [SerializeField] float speed = 3f;
+    [SerializeField] float health = 3f;
     [SerializeField] GameObject path;
 
     [Space(20f)]
@@ -17,18 +19,13 @@ public class Enemy : MonoBehaviour
 
     List<Vector2> waypoints;
     int waypointIndex;
+
     bool isRunning;
     bool isAttacking;
     bool isPathCompleted;
     bool isWaiting;
+    bool canMove;
     bool isDying;
-
-    // [Space(20f)]
-    // [SerializeField] AudioSource hittedSound;
-    // [SerializeField] AudioSource attackSound;
-
-    // [Space(20f)] Adds a space of 20 units before the variable field in the inspector so it's more readable
-    // [SerializeField] gives to us the possibility to edit the variable in the inspector
 
     void Start()
     {
@@ -60,6 +57,7 @@ public class Enemy : MonoBehaviour
         isRunning = false;
         isAttacking = false;
         isPathCompleted = false;
+        canMove = true;
         isWaiting = false;
         isDying = false;
     }
@@ -67,7 +65,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // If the player is dead or the enemy is dead the enemy stops
-        if (isDying || PlayerController.isDying)
+        if (isDying || PlayerController.isDying || !canMove)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             animator.SetBool("IsRunning", false);
@@ -86,8 +84,6 @@ public class Enemy : MonoBehaviour
             FlipTowardsPlayer();
         }
 
-        // The magnitude is the multiplications of the parameters in a vector. sqrMagnitude() return the square root of the magnitude which gives better performance
-        // If the sqrMagnitude of the velocity is higher than 0.01 means the enemy is moving
         if (rb.velocity.sqrMagnitude > 0.01f) isRunning = true;
         else isRunning = false;
 
@@ -103,10 +99,6 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // Calculate the distance between the waypoint and the current posittion of the enemy
-        // The vector gets normalized so we have only 1 or 0t.
-        // new Vector2(20, 0).normalized --> Vector2(1, 0)
-        // new Vector2(-20, 0).normalized --> Vector2(-1, 0)
         Vector2 direction = (waypoints[waypointIndex] - (Vector2)transform.position).normalized;
 
         // The enemy moves towards the waypoint
@@ -217,7 +209,29 @@ public class Enemy : MonoBehaviour
         isAttacking = false;
     }
 
-    public void Die()
+    public void GetHitted()
+    {
+        health--;
+
+        if (health > 0)
+        {
+            animator.SetTrigger("Hit");
+            canMove = false;
+            StartCoroutine(GetHittedDelay());
+        }
+        else
+        {
+            Die();
+        }
+    }
+
+    IEnumerator GetHittedDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canMove = true;
+    }
+
+    void Die()
     {
         if (isDying) return;
 
