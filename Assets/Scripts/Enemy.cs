@@ -20,6 +20,10 @@ public class Enemy : MonoBehaviour
     List<Vector2> waypoints;
     int waypointIndex;
 
+    [Space(20f)]
+    [SerializeField] AudioSource attackSound;
+    [SerializeField] AudioSource hittedSound;
+
     bool isRunning;
     bool isAttacking;
     bool isPathCompleted;
@@ -33,17 +37,14 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        // Ignore collisions with the Player
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
 
-        // Ignore collisions with the other enemies
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>());
         }
 
-        // Get all waypoints' positions and store them in waypoints
         waypoints = new List<Vector2>();
         for (int i = 0; i < path.transform.childCount; i++)
         {
@@ -64,7 +65,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        // If the player is dead or the enemy is dead the enemy stops
         if (isDying || PlayerController.isDying || !canMove)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -72,8 +72,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // If the player is more than 1.5 units distant the enemy follows its path. If the player is closer the enemy attacks him
-        if ((Vector2.Distance(transform.position, player.position) > 1.5f && !isAttacking) || PlayerController.isInvisible)
+        if ((Vector2.Distance(transform.position, player.position) > 2f && !isAttacking) || PlayerController.isInvisible)
         {
             Patrol();
             Flip();
@@ -92,7 +91,6 @@ public class Enemy : MonoBehaviour
 
     void Patrol()
     {
-        // If the enemy is waiting it stops
         if (isWaiting)
         {
             rb.velocity = Vector2.zero;
@@ -101,38 +99,32 @@ public class Enemy : MonoBehaviour
 
         Vector2 direction = (waypoints[waypointIndex] - (Vector2)transform.position).normalized;
 
-        // The enemy moves towards the waypoint
         rb.velocity = direction * speed;
 
-        // Check if the enemy is close to the waypoint
         if (Vector2.Distance(transform.position, waypoints[waypointIndex]) < 0.25f)
         {
             if (!isPathCompleted)
             {
-                // Increment the waypoint's index so the enemy moves towards the next waypoint
                 waypointIndex++;
 
-                // If the enemy has reached all the waypoints it stops for 1 second
                 if (waypointIndex == waypoints.Count)
                 {
                     waypointIndex--;
                     isPathCompleted = true;
 
-                    StartCoroutine(Wait()); // Stop for 1 second
+                    StartCoroutine(Wait());
                 }
             }
             else
             {
-                // Decrease the waypoint's index so the enemy moves towards the next waypoint (reverse)
                 waypointIndex--;
 
-                // If the enemy has reached all the waypoints it stops for 1 second (reverse)
                 if (waypointIndex == -1)
                 {
                     waypointIndex++;
                     isPathCompleted = false;
 
-                    StartCoroutine(Wait()); // Stop for 1 second 
+                    StartCoroutine(Wait());
                 }
             }
         }
@@ -149,13 +141,11 @@ public class Enemy : MonoBehaviour
     {
         if (rb.velocity.x > 0)
         {
-            // Turn right
             transform.localEulerAngles = Vector2.zero;
         }
 
         if (rb.velocity.x < 0)
         {
-            // Turn left
             transform.localEulerAngles = new Vector2(0, 180);
         }
     }
@@ -164,12 +154,10 @@ public class Enemy : MonoBehaviour
     {
         if (player.position.x > transform.position.x)
         {
-            // Turn right
             transform.localEulerAngles = Vector2.zero;
         }
         if (player.position.x < transform.position.x)
         {
-            // Turn left
             transform.localEulerAngles = new Vector2(0, 180);
         }
     }
@@ -180,19 +168,16 @@ public class Enemy : MonoBehaviour
 
         animator.SetTrigger("Attack");
 
-        // Stop the enemy
         animator.SetBool("IsRunning", false);
         rb.velocity = new Vector2(0, rb.velocity.y);
 
         isAttacking = true;
 
-        StartCoroutine(AttackDelay()); // The enemy can attack after 0.75 seconds
+        StartCoroutine(AttackDelay());
     }
 
     void DamagePlayer()
     {
-        // Check if the player is in the playerCheck circle
-
         Collider2D collision = Physics2D.OverlapCircle(playerCheck.position, radius, playerLayer);
 
         if (collision == null) return;
@@ -200,18 +185,19 @@ public class Enemy : MonoBehaviour
         if (collision.GetComponent<PlayerController>())
             collision.GetComponent<PlayerController>().GetHitted();
 
-        // if (attackSound != null) attackSound.Play();
+        if (attackSound != null) attackSound.Play();
     }
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         isAttacking = false;
     }
 
     public void GetHitted()
     {
         health--;
+        hittedSound.Play();
 
         if (health > 0)
         {
@@ -235,11 +221,10 @@ public class Enemy : MonoBehaviour
     {
         if (isDying) return;
 
-        // hittedSound.Play();
         animator.SetTrigger("Death");
         isDying = true;
         rb.gravityScale = 3;
-        Invoke(nameof(DestroyObject), 1); // Destroy the gameObject after 1 second
+        Invoke(nameof(DestroyObject), 1);
     }
 
     void DestroyObject()
@@ -252,7 +237,6 @@ public class Enemy : MonoBehaviour
         animator.SetBool("IsRunning", isRunning);
     }
 
-    // Draw the playerCheck circle in the editor so we can edit it
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

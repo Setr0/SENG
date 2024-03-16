@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator animator;
 
-    [Space(20)]
     [SerializeField] float speed = 7f;
     [SerializeField] float deathPositionY = -15f;
 
@@ -41,9 +40,9 @@ public class PlayerController : MonoBehaviour
     [Space(20)]
     [SerializeField] GameObject playerPanel;
     [SerializeField] GameObject gameoverPanel;
-    // [SerializeField] AudioSource jumpSound;
-    // [SerializeField] AudioSource attackSound;
-    // [SerializeField] AudioSource hittedSound;
+    [SerializeField] AudioSource jumpSound;
+    [SerializeField] AudioSource attackSound;
+    [SerializeField] AudioSource hittedSound;
     // [SerializeField] AudioSource gameoverMusic;
     // [SerializeField] AudioSource backgroundMusic;
 
@@ -131,7 +130,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isJumping = true;
-            // jumpSound.Play();
+            jumpSound.Play();
         }
 
         if (Input.GetKeyUp(KeyCode.Space)) coyoteTimer = 0f;
@@ -178,12 +177,12 @@ public class PlayerController : MonoBehaviour
             collision.GetComponent<Enemy>().GetHitted();
         }
 
-        // attackSound.Play();
+        attackSound.Play();
     }
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
         isAttacking = false;
     }
 
@@ -218,6 +217,7 @@ public class PlayerController : MonoBehaviour
     public void GetHitted()
     {
         health--;
+        hittedSound.Play();
 
         if (health > 0)
         {
