@@ -9,8 +9,12 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Animator animator;
+
+    [Space(20)]
     [SerializeField] float speed = 7f;
     [SerializeField] float deathPositionY = -15f;
+
+    [Space(20)]
     [SerializeField] float jumpForce = 12f;
     [SerializeField] Transform groundCheck;
     [SerializeField] float radius = 0.25f;
@@ -19,23 +23,36 @@ public class PlayerController : MonoBehaviour
     float coyoteTimer;
     Vector2 gravity;
     [SerializeField] float fallMultiplier = 3f;
+
+    [Space(20)]
     [SerializeField] Transform enemyCheck;
     [SerializeField] float attackRadius = 1f;
     [SerializeField] LayerMask enemyLayer;
+
+    [Space(20)]
     [SerializeField] float health = 5;
     [SerializeField] Slider healthSlider;
-    bool isRunning;
-    bool isJumping;
-    bool isFalling;
-    bool isAttacking;
-    public static bool isDying;
-    // [SerializeField] GameObject playerPanel;
+
+    [Space(20)]
+    [SerializeField] float invisibilityTime = 5;
+    float invisibilityTimer;
+    [SerializeField] Slider invisibilitySlider;
+
+    [Space(20)]
+    [SerializeField] GameObject playerPanel;
     [SerializeField] GameObject gameoverPanel;
     // [SerializeField] AudioSource jumpSound;
     // [SerializeField] AudioSource attackSound;
     // [SerializeField] AudioSource hittedSound;
     // [SerializeField] AudioSource gameoverMusic;
     // [SerializeField] AudioSource backgroundMusic;
+
+    bool isRunning;
+    bool isJumping;
+    bool isFalling;
+    bool isAttacking;
+    public static bool isInvisible;
+    public static bool isDying;
 
     void Start()
     {
@@ -45,12 +62,16 @@ public class PlayerController : MonoBehaviour
 
         healthSlider.maxValue = health;
 
+        invisibilityTimer = invisibilityTime;
+        invisibilitySlider.maxValue = invisibilityTime;
+
         gravity = new Vector2(0, -Physics2D.gravity.y);
         coyoteTimer = 0f;
         isRunning = false;
         isJumping = false;
         isFalling = false;
         isAttacking = false;
+        isInvisible = false;
         isDying = false;
     }
 
@@ -73,6 +94,8 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+
+        HandleInvisibility();
 
         Jump();
         Fall();
@@ -135,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !isAttacking && !isFalling && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Q) && !isAttacking && !isFalling && !isJumping && !isInvisible)
         {
             animator.SetTrigger("Attack");
             isAttacking = true;
@@ -218,8 +241,45 @@ public class PlayerController : MonoBehaviour
         // backgroundMusic.Stop();
         Time.timeScale = 0;
         // gameoverMusic.Play();
-        // playerPanel.SetActive(false);
+        playerPanel.SetActive(false);
         gameoverPanel.SetActive(true);
+    }
+
+    void HandleInvisibility()
+    {
+        if (!isInvisible) return;
+
+        invisibilitySlider.value = invisibilityTimer;
+
+        invisibilityTimer -= Time.deltaTime;
+
+        if (invisibilityTimer <= 0)
+        {
+            invisibilityTimer = invisibilityTime;
+
+            spriteRenderer.color = Color.white;
+            invisibilitySlider.transform.parent.gameObject.SetActive(false);
+            isInvisible = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("HealthPotion"))
+        {
+            if (health >= 5) return;
+
+            Destroy(collision.gameObject);
+            health++;
+        }
+
+        if (collision.CompareTag("Durag"))
+        {
+            Destroy(collision.gameObject);
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+            invisibilitySlider.transform.parent.gameObject.SetActive(true);
+            isInvisible = true;
+        }
     }
 
     void OnDrawGizmos()

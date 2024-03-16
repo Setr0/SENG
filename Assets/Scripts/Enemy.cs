@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
         }
 
         // If the player is more than 1.5 units distant the enemy follows its path. If the player is closer the enemy attacks him
-        if (Vector2.Distance(transform.position, player.position) > 1.5f && !isAttacking)
+        if ((Vector2.Distance(transform.position, player.position) > 1.5f && !isAttacking) || PlayerController.isInvisible)
         {
             Patrol();
             Flip();
