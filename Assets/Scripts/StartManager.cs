@@ -11,13 +11,15 @@ public class StartManager : MonoBehaviour
     [SerializeField] Camera[] cameras;
 
 
-    void Start()
+    IEnumerator Start()
     {
         if (!levelText.transform.parent.gameObject.activeSelf)
         {
             PlayerController.canMove = true;
-            return;
+            yield return null;
         }
+
+        yield return new WaitForSeconds(1f);
 
         mainCamera.m_Lens.OrthographicSize -= 1.5f;
 

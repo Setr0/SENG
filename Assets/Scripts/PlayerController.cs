@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource jumpSound;
     [SerializeField] AudioSource attackSound;
     [SerializeField] AudioSource hittedSound;
+    [SerializeField] AudioSource itemSound;
     // [SerializeField] AudioSource gameoverMusic;
     // [SerializeField] AudioSource backgroundMusic;
 
@@ -280,12 +281,14 @@ public class PlayerController : MonoBehaviour
             if (health >= 5) return;
 
             Destroy(collision.gameObject);
+            itemSound.Play();
             health++;
         }
 
         if (collision.CompareTag("Durag"))
         {
             Destroy(collision.gameObject);
+            itemSound.Play();
             spriteRenderer.color = new Color(1, 1, 1, 0.5f);
             invisibilitySlider.transform.parent.gameObject.SetActive(true);
             isInvisible = true;
