@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource attackSound;
     [SerializeField] AudioSource hittedSound;
     [SerializeField] AudioSource itemSound;
-    // [SerializeField] AudioSource gameoverMusic;
-    // [SerializeField] AudioSource backgroundMusic;
+    [SerializeField] AudioSource gameoverMusic;
+    [SerializeField] AudioSource backgroundMusic;
 
     bool isRunning;
     bool isJumping;
@@ -242,16 +242,16 @@ public class PlayerController : MonoBehaviour
     {
         if (isDying) return;
 
-        // hittedSound.Play();
+        hittedSound.Play();
         animator.SetTrigger("Death");
         isDying = true;
     }
 
     void Gameover()
     {
-        // backgroundMusic.Stop();
+        backgroundMusic.Stop();
         Time.timeScale = 0;
-        // gameoverMusic.Play();
+        gameoverMusic.Play();
         playerPanel.SetActive(false);
         gameoverPanel.SetActive(true);
     }
