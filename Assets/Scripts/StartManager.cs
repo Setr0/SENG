@@ -44,7 +44,7 @@ public class StartManager : MonoBehaviour
             levelText.color = new Color(1, 1, 1, opacity);
         }
 
-        levelText.transform.parent.gameObject.SetActive(false);
+        levelText.transform.parent.parent.parent.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(0.25f);
 
