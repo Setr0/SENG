@@ -26,7 +26,7 @@ public class EnemyLife : MonoBehaviour
         }
     }
 
-    public void GetHitted()
+    public virtual void GetHitted()
     {
         health--;
         if (hittedSound != null) hittedSound.Play();
