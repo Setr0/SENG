@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 3171812377508768197}
   - component: {fileID: 7696428527239001274}
   - component: {fileID: 6709198501431857370}
+  - component: {fileID: 5058352242857067713}
   - component: {fileID: -1047699483474792176}
   - component: {fileID: 4367589384709459186}
   m_Layer: 8
@@ -229,7 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  health: 3
   path: {fileID: 7932592719073801424}
   playerCheck: {fileID: 7167997405543629884}
   radius: 1
@@ -238,6 +238,23 @@ MonoBehaviour:
     m_Bits: 128
   attackSound: {fileID: -1047699483474792176}
   hittedSound: {fileID: 4367589384709459186}
+  canMove: 0
+--- !u!114 &5058352242857067713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619506107733692837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab82f5ca01b7c714f9263fb92e85c1f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  isHitted: 0
+  isDying: 0
+  hittedSound: {fileID: 0}
 --- !u!82 &-1047699483474792176
 AudioSource:
   m_ObjectHideFlags: 0

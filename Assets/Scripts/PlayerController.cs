@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D collision in collisions)
         {
-            collision.GetComponent<Enemy>().GetHitted();
+            collision.GetComponent<EnemyLife>().GetHitted();
         }
 
         attackSound.Play();

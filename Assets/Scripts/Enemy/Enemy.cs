@@ -6,10 +6,10 @@ public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator animator;
+    EnemyLife enemyLife;
 
     Transform player;
     [SerializeField] float speed = 3f;
-    [SerializeField] float health = 3f;
     [SerializeField] GameObject path;
 
     [Space(20f)]
@@ -28,13 +28,12 @@ public class Enemy : MonoBehaviour
     bool isAttacking;
     bool isPathCompleted;
     bool isWaiting;
-    bool canMove;
-    bool isDying;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        enemyLife = GetComponent<EnemyLife>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
@@ -58,14 +57,12 @@ public class Enemy : MonoBehaviour
         isRunning = false;
         isAttacking = false;
         isPathCompleted = false;
-        canMove = true;
         isWaiting = false;
-        isDying = false;
     }
 
     void Update()
     {
-        if (isDying || PlayerController.isDying || !canMove)
+        if (enemyLife.isDying || PlayerController.isDying || enemyLife.isHitted)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             animator.SetBool("IsRunning", false);
@@ -194,40 +191,7 @@ public class Enemy : MonoBehaviour
         isAttacking = false;
     }
 
-    public void GetHitted()
-    {
-        health--;
-        hittedSound.Play();
-
-        if (health > 0)
-        {
-            animator.SetTrigger("Hit");
-            canMove = false;
-            StartCoroutine(GetHittedDelay());
-        }
-        else
-        {
-            Die();
-        }
-    }
-
-    IEnumerator GetHittedDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
-        canMove = true;
-    }
-
-    void Die()
-    {
-        if (isDying) return;
-
-        animator.SetTrigger("Death");
-        isDying = true;
-        rb.gravityScale = 3;
-        Invoke(nameof(DestroyObject), 1);
-    }
-
-    void DestroyObject()
+    private void OnBecameInvisible()
     {
         Destroy(gameObject);
     }
