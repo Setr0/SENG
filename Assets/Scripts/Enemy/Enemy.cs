@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (enemyLife.isDying || PlayerController.isDying || enemyLife.isHitted)
+        if (enemyLife.isDying || PlayerController.isDying || enemyLife.isHitted || DialogueManager.isDialogueActive)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             animator.SetBool("IsRunning", false);

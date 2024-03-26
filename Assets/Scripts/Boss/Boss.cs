@@ -44,28 +44,22 @@ public class Boss : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
 
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>());
-        }
-
         isAttacking = false;
     }
 
     void FixedUpdate()
     {
-        if (!bossesManager.isActive) return;
+        if (!bossesManager.isActive || DialogueManager.isDialogueActive) return;
 
         if (canRunAway && Vector2.Distance(transform.position, player.transform.position) <= runAwayDistance)
-            FollowTarget(-1);
+            FollowTarget(-1, player.transform.position);
         else
-            FollowTarget(1);
+            FollowTarget(1, player.transform.position);
     }
 
     protected virtual void Update()
     {
-        if (bossLife.isDying || PlayerController.isDying)
+        if (bossLife.isDying || PlayerController.isDying || DialogueManager.isDialogueActive)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             animator.SetBool("IsRunning", false);
@@ -76,7 +70,7 @@ public class Boss : MonoBehaviour
         HandleAnimations();
     }
 
-    protected virtual void FollowTarget(int speedMultiplier, Vector2 target = default)
+    protected virtual void FollowTarget(int speedMultiplier, Vector2 target)
     {
         if (player == null || isAttacking || bossLife.isDying)
         {
@@ -84,17 +78,16 @@ public class Boss : MonoBehaviour
             return;
         }
 
-        if (target == default) target = player.transform.position;
+        if (Vector2.Distance(transform.position, target) <= stoppingDistance)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+
+            return;
+        }
 
         Vector2 direction = new Vector2(target.x - transform.position.x, 0).normalized;
 
         rb.velocity = new Vector2(direction.x * speed * speedMultiplier, rb.velocity.y);
-
-        if (Vector2.Distance(transform.position, target) <= stoppingDistance
-        && Vector2.Distance(transform.position, target) > runAwayDistance)
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
     }
 
     void FlipTowardsPlayer()

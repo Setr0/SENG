@@ -21,16 +21,14 @@ public class BossLife : EnemyLife
         base.Update();
     }
 
-    public override void GetHitted()
-    {
-        base.GetHitted();
-    }
-
     public override void Die()
     {
-        // GetComponent<Boss>().backgroundMusic.UnPause();
-        // GetComponent<Boss>().bossBattleMusic.Stop();
-
         base.Die();
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>());
+        }
     }
 }

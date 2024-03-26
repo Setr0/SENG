@@ -28,6 +28,8 @@ public class EnemyLife : MonoBehaviour
 
     public virtual void GetHitted()
     {
+        if (isDying) return;
+
         health--;
         if (hittedSound != null) hittedSound.Play();
 

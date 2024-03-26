@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BossesManager : MonoBehaviour
@@ -9,15 +10,20 @@ public class BossesManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bossNameText;
     [SerializeField] Slider healthSlider;
     [SerializeField] GameObject wall;
+    [SerializeField] DialogueManager dialogueManager;
+    [SerializeField] string[] text;
+    [SerializeField] string nextLevel;
     List<BossLife> bossLives;
     PlayerController player;
     [HideInInspector] public bool isActive;
+    bool isLoadingNextLevel;
 
     void Start()
     {
         bossLives = new List<BossLife>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         isActive = false;
+        isLoadingNextLevel = false;
 
         bossNameText.text = "";
 
@@ -40,7 +46,7 @@ public class BossesManager : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) > 10) return;
+        if (Vector2.Distance(transform.position, player.transform.position) > 10 || isLoadingNextLevel) return;
         else
         {
             isActive = true;
@@ -52,8 +58,21 @@ public class BossesManager : MonoBehaviour
 
         if (GetTotalHealth() == 0)
         {
-            healthSlider.transform.parent.gameObject.SetActive(false);
-            Destroy(gameObject);
+            if (!DialogueManager.isDialogueActive && !DialogueManager.isDialogueCompleted)
+            {
+                healthSlider.transform.parent.gameObject.SetActive(false);
+                dialogueManager.npcName = bossNameText.text;
+                dialogueManager.text = text;
+                dialogueManager.gameObject.SetActive(true);
+
+                return;
+            }
+
+            if (DialogueManager.isDialogueCompleted)
+            {
+                StartCoroutine(LoadNextLevel());
+                isLoadingNextLevel = true;
+            }
         }
     }
 
@@ -67,5 +86,12 @@ public class BossesManager : MonoBehaviour
         }
 
         return totalHealth;
+    }
+
+    IEnumerator LoadNextLevel()
+    {
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene(nextLevel);
     }
 }
