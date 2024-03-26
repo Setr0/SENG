@@ -17,8 +17,13 @@ public class BossLife : EnemyLife
     protected override void Update()
     {
         if (!bossesManager.isActive) return;
-
         base.Update();
+    }
+
+    public override void GetHitted()
+    {
+        bossesManager.healthSlider.value--;
+        base.GetHitted();
     }
 
     public override void Die()

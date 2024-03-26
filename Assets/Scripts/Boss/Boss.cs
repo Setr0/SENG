@@ -28,10 +28,6 @@ public class Boss : MonoBehaviour
     [Space(20)]
     public float damage = 3;
 
-    [Space(20)]
-    public AudioSource bossBattleMusic;
-    public AudioSource backgroundMusic;
-
     protected bool isAttacking;
 
     void Start()

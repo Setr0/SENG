@@ -8,25 +8,26 @@ using UnityEngine.UI;
 public class BossesManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI bossNameText;
-    [SerializeField] Slider healthSlider;
+    public Slider healthSlider;
     [SerializeField] GameObject wall;
+    [SerializeField] GameObject enemies;
+    [SerializeField] GameObject platforms;
     [SerializeField] DialogueManager dialogueManager;
     [SerializeField] string[] text;
     [SerializeField] string nextLevel;
-    List<BossLife> bossLives;
     PlayerController player;
     [HideInInspector] public bool isActive;
     bool isLoadingNextLevel;
 
     void Start()
     {
-        bossLives = new List<BossLife>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         isActive = false;
         isLoadingNextLevel = false;
 
         bossNameText.text = "";
 
+        float totalHealth = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
             if (i != transform.childCount - 1)
@@ -38,10 +39,11 @@ public class BossesManager : MonoBehaviour
                 bossNameText.text += transform.GetChild(i).GetComponent<Boss>().bossName;
             }
 
-            bossLives.Add(transform.GetChild(i).GetComponent<BossLife>());
+            totalHealth += transform.GetChild(i).GetComponent<BossLife>().health;
         }
 
-        healthSlider.maxValue = GetTotalHealth();
+        healthSlider.maxValue = totalHealth;
+        healthSlider.value = totalHealth;
     }
 
     void Update()
@@ -49,14 +51,17 @@ public class BossesManager : MonoBehaviour
         if (Vector2.Distance(transform.position, player.transform.position) > 10 || isLoadingNextLevel) return;
         else
         {
-            isActive = true;
-            healthSlider.transform.parent.gameObject.SetActive(true);
-            wall.SetActive(true);
+            if (!isActive)
+            {
+                isActive = true;
+                healthSlider.transform.parent.gameObject.SetActive(true);
+                Destroy(enemies);
+                Destroy(platforms);
+                wall.SetActive(true);
+            }
         }
 
-        healthSlider.value = GetTotalHealth();
-
-        if (GetTotalHealth() == 0)
+        if (healthSlider.value == 0)
         {
             if (!DialogueManager.isDialogueActive && !DialogueManager.isDialogueCompleted)
             {
@@ -74,18 +79,6 @@ public class BossesManager : MonoBehaviour
                 isLoadingNextLevel = true;
             }
         }
-    }
-
-    float GetTotalHealth()
-    {
-        float totalHealth = 0;
-
-        foreach (BossLife bossLife in bossLives)
-        {
-            totalHealth += bossLife.health;
-        }
-
-        return totalHealth;
     }
 
     IEnumerator LoadNextLevel()

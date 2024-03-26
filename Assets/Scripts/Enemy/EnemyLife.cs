@@ -57,6 +57,7 @@ public class EnemyLife : MonoBehaviour
 
         animator.SetTrigger("Death");
         isDying = true;
+        GetComponent<Rigidbody2D>().gravityScale = 3;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 

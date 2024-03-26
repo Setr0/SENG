@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource attackSound;
     [SerializeField] AudioSource hittedSound;
     [SerializeField] AudioSource itemSound;
+    [SerializeField] AudioSource deathSound;
     [SerializeField] AudioSource gameoverMusic;
     [SerializeField] AudioSource backgroundMusic;
 
@@ -242,7 +243,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isDying) return;
 
-        hittedSound.Play();
+        deathSound.Play();
         animator.SetTrigger("Death");
         isDying = true;
     }
