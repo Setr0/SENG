@@ -13,10 +13,11 @@ public class StartManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        if (!levelText.transform.parent.gameObject.activeSelf)
+        if (!levelText.transform.parent.parent.parent.gameObject.activeSelf)
         {
             PlayerController.canMove = true;
-            yield return null;
+
+            yield break;
         }
 
         yield return new WaitForSeconds(1f);
