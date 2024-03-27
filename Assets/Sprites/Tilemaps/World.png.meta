@@ -9232,6 +9232,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: World_432
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54266b84b4829fe4da4ee8b7e9621edc
+      internalID: 46627261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -9614,6 +9635,7 @@ TextureImporter:
       World_43: -1586072870
       World_430: 1662962372
       World_431: 1503582832
+      World_432: 46627261
       World_44: -1424538839
       World_45: -1472618389
       World_46: -1090606973
