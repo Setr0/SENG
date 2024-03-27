@@ -42,6 +42,7 @@ Transform:
   m_Children:
   - {fileID: 2957824515706539280}
   - {fileID: 5064700676865811066}
+  - {fileID: 4732089579705579121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2823321993855181270
@@ -220,6 +221,10 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   invisibilityTime: 5
   invisibilitySlider: {fileID: 0}
+  axe: {fileID: 1896539903723036608, guid: 7b0d48c309583d542a9e5890889eac41, type: 3}
+  axeSpawn: {fileID: 4732089579705579121}
+  hasAxe: 0
+  canThrowAxe: 1
   playerPanel: {fileID: 0}
   gameoverPanel: {fileID: 0}
   jumpSound: {fileID: 7567442668460791171}
@@ -805,6 +810,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &837562874505493155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4732089579705579121}
+  m_Layer: 7
+  m_Name: AxeSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4732089579705579121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837562874505493155}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7, y: 0.10000001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 694092579528278544}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4379019164118129646
 GameObject:
   m_ObjectHideFlags: 0

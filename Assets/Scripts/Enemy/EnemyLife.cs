@@ -65,4 +65,13 @@ public class EnemyLife : MonoBehaviour
     {
         if (isDying) Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Axe") && !isDying)
+        {
+            GetHitted();
+            Destroy(collision.gameObject);
+        }
+    }
 }

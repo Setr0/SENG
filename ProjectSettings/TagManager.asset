@@ -9,6 +9,7 @@ TagManager:
   - HealthPotion
   - Spikes
   - Platform
+  - Axe
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - Post Processing BG
   - World
   - Post Processing Color
-  - 
-  - 
+  - Camera Confiner
+  - Axe
   - 
   - 
   - 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float invisibilityTime = 5;
     float invisibilityTimer;
     [SerializeField] Slider invisibilitySlider;
+
+    [Space(20)]
+    [SerializeField] GameObject axe;
+    [SerializeField] Transform axeSpawn;
+    [SerializeField] bool hasAxe;
+    [SerializeField] bool canThrowAxe = true;
 
     [Space(20)]
     [SerializeField] GameObject playerPanel;
@@ -102,6 +109,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Fall();
         Attack();
+        ThrowAxe();
         Flip();
     }
 
@@ -186,6 +194,24 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         isAttacking = false;
+    }
+
+    void ThrowAxe()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && hasAxe && canThrowAxe)
+        {
+            GameObject newAxe = Instantiate(axe, axeSpawn.position, axeSpawn.rotation);
+            if (transform.localEulerAngles.y == 180)
+                newAxe.GetComponent<Axe>().direction = new Vector2(-1, 0);
+            canThrowAxe = false;
+            StartCoroutine(ThrowAxeDelay());
+        }
+    }
+
+    IEnumerator ThrowAxeDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        canThrowAxe = true;
     }
 
     void Flip()
