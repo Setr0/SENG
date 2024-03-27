@@ -48,7 +48,7 @@ public class BossesManager : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) > 10 || isLoadingNextLevel) return;
+        if (Vector2.Distance(transform.position, player.transform.position) > 5 || isLoadingNextLevel) return;
         else
         {
             if (!isActive)

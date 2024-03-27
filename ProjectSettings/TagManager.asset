@@ -8,6 +8,7 @@ TagManager:
   - Durag
   - HealthPotion
   - Spikes
+  - Platform
   layers:
   - Default
   - TransparentFX

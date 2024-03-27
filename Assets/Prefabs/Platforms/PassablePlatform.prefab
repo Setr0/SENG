@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 1782998793, guid: c845a72767951f74988c5fe5f2649e47, type: 3}
     - target: {fileID: 3701553132648611153, guid: b3a1581ed32ddb248b1e4ef7f6e03bec, type: 3}
       propertyPath: m_Name
-      value: PassablePlatform Variant
+      value: PassablePlatform
       objectReference: {fileID: 0}
     - target: {fileID: 6469635363135265958, guid: b3a1581ed32ddb248b1e4ef7f6e03bec, type: 3}
       propertyPath: m_Sprite

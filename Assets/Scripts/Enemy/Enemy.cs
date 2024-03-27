@@ -193,7 +193,8 @@ public class Enemy : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        if (enemyLife.isDying)
+            Destroy(gameObject);
     }
 
     void HandleAnimations()
