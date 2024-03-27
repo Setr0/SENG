@@ -23,8 +23,7 @@ public class Door : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && isPlayerNear && isOpened)
         {
-            if (nextDoor.isOpened)
-                player.position = nextDoor.transform.position;
+            if (nextDoor.isOpened) player.position = nextDoor.transform.position;
         }
     }
 
