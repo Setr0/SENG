@@ -205,7 +205,7 @@ MonoBehaviour:
   deathPositionY: -15
   jumpForce: 12
   groundCheck: {fileID: 2957824515706539280}
-  radius: 0.25
+  radius: 0.125
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
