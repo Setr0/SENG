@@ -27,6 +27,9 @@ public class Axe : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.GetComponent<EnemyLife>())
+            if (collision.GetComponent<EnemyLife>().isDying) return;
+
         Destroy(gameObject);
     }
 }
