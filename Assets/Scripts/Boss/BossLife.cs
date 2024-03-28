@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class BossLife : EnemyLife
@@ -35,5 +36,7 @@ public class BossLife : EnemyLife
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>());
         }
+
+        if (GetComponent<PlayableDirector>() != null) GetComponent<PlayableDirector>().Play();
     }
 }

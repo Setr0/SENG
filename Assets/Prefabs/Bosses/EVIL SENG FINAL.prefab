@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df73876889e762428500b886ae9ceab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 18
   isHitted: 0
   isDying: 0
   hittedSound: {fileID: 7832155342064130969}

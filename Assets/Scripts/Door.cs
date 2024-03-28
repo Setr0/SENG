@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Door : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Door : MonoBehaviour
     [SerializeField] Sprite doorClosed;
     [SerializeField] Sprite doorOpened;
     Transform player;
+    Image commadImage;
     bool isPlayerNear;
     public bool isOpened;
 
@@ -16,6 +18,7 @@ public class Door : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        commadImage = GameObject.FindGameObjectWithTag("FKey").GetComponent<Image>();
         isPlayerNear = false;
     }
 
@@ -44,12 +47,18 @@ public class Door : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             isPlayerNear = true;
+            if (isOpened) commadImage.enabled = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             isPlayerNear = false;
+            commadImage.enabled = false;
+        }
     }
 }

@@ -207,9 +207,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  damage: 3
-  bossBattleMusic: {fileID: 0}
-  backgroundMusic: {fileID: 0}
+  damage: 2
   playerCheck: {fileID: 1752286648935821794}
   attackRadius: 1
   playerLayer:
@@ -227,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df73876889e762428500b886ae9ceab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 5
   isHitted: 0
   isDying: 0
   hittedSound: {fileID: 0}

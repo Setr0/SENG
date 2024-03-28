@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2490698101198075505}
   - component: {fileID: 8645642123342147881}
   - component: {fileID: 5162361992526710618}
+  - component: {fileID: 7439195431938062463}
   m_Layer: 8
   m_Name: EVIL SENG
   m_TagString: Enemy
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df73876889e762428500b886ae9ceab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
+  health: 12
   isHitted: 0
   isDying: 0
   hittedSound: {fileID: 5162361992526710618}
@@ -326,6 +327,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!320 &7439195431938062463
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127206171686455257}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: c641e16c4c7e5d046b49676a3fe7d71c, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 1546024088644899622, guid: c641e16c4c7e5d046b49676a3fe7d71c, type: 2}
+    value: {fileID: 122136558813059207}
+  - key: {fileID: 6863754450787645312, guid: c641e16c4c7e5d046b49676a3fe7d71c, type: 2}
+    value: {fileID: 122136558813059207}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &2277884798939214623
 GameObject:
   m_ObjectHideFlags: 0

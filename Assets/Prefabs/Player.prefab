@@ -218,7 +218,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  health: 5
+  health: 10
   healthSlider: {fileID: 0}
   invisibilityTime: 5
   invisibilitySlider: {fileID: 0}

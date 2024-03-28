@@ -10,6 +10,7 @@ TagManager:
   - Spikes
   - Platform
   - Axe
+  - FKey
   layers:
   - Default
   - TransparentFX

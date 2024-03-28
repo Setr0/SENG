@@ -270,7 +270,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  damage: 3
+  damage: 2
   playerCheck: {fileID: 5550165333277244527}
   attackRadius: 1.5
   playerLayer:
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df73876889e762428500b886ae9ceab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 12
   isHitted: 0
   isDying: 0
   hittedSound: {fileID: 3181668510025242088}

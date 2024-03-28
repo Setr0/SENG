@@ -491,6 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossNameText: {fileID: 148071370}
   healthSlider: {fileID: 1980748882}
+  activationDistance: 10
   wall: {fileID: 223642642}
   enemies: {fileID: 1461471154}
   platforms: {fileID: 963062602}
@@ -1316,7 +1317,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6562047, y: 0.30108, z: -10}
+  m_LocalPosition: {x: 1.6633012, y: 0.30104998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5291,7 +5292,7 @@ Transform:
   m_GameObject: {fileID: 801969512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0000005, y: 0.25000024, z: -10}
+  m_LocalPosition: {x: -1.0000002, y: 0.25000024, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6152,10 +6153,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomBoss (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 7542788144502937809, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
-      propertyPath: health
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7778163604950757105, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
       propertyPath: bossName
       value: Mim1c
@@ -6642,10 +6639,6 @@ PrefabInstance:
     - target: {fileID: 192687019869911776, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
       propertyPath: m_Name
       value: MushroomBoss (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7542788144502937809, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
-      propertyPath: health
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7778163604950757105, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
       propertyPath: bossName
@@ -116803,10 +116796,6 @@ PrefabInstance:
     - target: {fileID: 192687019869911776, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
       propertyPath: m_Name
       value: MushroomBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 7542788144502937809, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
-      propertyPath: health
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7847326277938997880, guid: 08215d063916ebf45aadb8055f3b9b4e, type: 3}
       propertyPath: m_LocalPosition.x

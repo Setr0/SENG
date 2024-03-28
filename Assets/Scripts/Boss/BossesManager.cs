@@ -9,6 +9,7 @@ public class BossesManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI bossNameText;
     public Slider healthSlider;
+    [SerializeField] float activationDistance = 5f;
     [SerializeField] GameObject wall;
     [SerializeField] GameObject enemies;
     [SerializeField] GameObject platforms;
@@ -49,7 +50,7 @@ public class BossesManager : MonoBehaviour
 
     void Update()
     {
-        if ((Vector2.Distance(transform.position, player.transform.position) > 5 || isLoadingNextLevel) && !isActive) return;
+        if ((Vector2.Distance(transform.position, player.transform.position) > activationDistance || isLoadingNextLevel) && !isActive) return;
         else
         {
             if (!isActive)
