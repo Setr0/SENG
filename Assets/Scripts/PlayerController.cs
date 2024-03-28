@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("HealthPotion"))
         {
-            if (health >= 5) return;
+            if (health >= 10) return;
 
             Destroy(collision.gameObject);
             itemSound.Play();
