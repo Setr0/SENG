@@ -13,6 +13,10 @@ public class StartManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        DialogueManager.isWritingText = false;
+        DialogueManager.isDialogueActive = false;
+        DialogueManager.isDialogueCompleted = false;
+
         if (!levelText.transform.parent.parent.parent.gameObject.activeSelf)
         {
             PlayerController.canMove = true;

@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     public string npcName;
     public string[] text;
     int textIndex;
-    bool isWritingText;
+    public static bool isWritingText;
     public static bool isDialogueActive;
     public static bool isDialogueCompleted;
 

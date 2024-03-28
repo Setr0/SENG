@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
 
     void ThrowAxe()
     {
-        if (Input.GetKeyDown(KeyCode.E) && hasAxe && canThrowAxe)
+        if (Input.GetKeyDown(KeyCode.E) && hasAxe && canThrowAxe && !isAttacking && !isInvisible)
         {
             GameObject newAxe = Instantiate(axe, axeSpawn.position, axeSpawn.rotation);
             if (transform.localEulerAngles.y == 180)
