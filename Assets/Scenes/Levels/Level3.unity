@@ -785,6 +785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossNameText: {fileID: 1545612545}
   healthSlider: {fileID: 1545612544}
+  activationDistance: 5
   wall: {fileID: 1154098059}
   enemies: {fileID: 1461471154}
   platforms: {fileID: 963062602}
@@ -110694,7 +110695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1979729076
 RectTransform:
   m_ObjectHideFlags: 0
