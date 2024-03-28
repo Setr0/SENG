@@ -17,6 +17,7 @@ public class BossesManager : MonoBehaviour
     [SerializeField] string nextLevel;
     PlayerController player;
     [HideInInspector] public bool isActive;
+    [SerializeField] GameObject unlockableItem;
     bool isLoadingNextLevel;
 
     void Start()
@@ -48,7 +49,7 @@ public class BossesManager : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) > 5 || isLoadingNextLevel) return;
+        if ((Vector2.Distance(transform.position, player.transform.position) > 5 || isLoadingNextLevel) && !isActive) return;
         else
         {
             if (!isActive)
@@ -75,8 +76,16 @@ public class BossesManager : MonoBehaviour
 
             if (DialogueManager.isDialogueCompleted)
             {
-                StartCoroutine(LoadNextLevel());
-                isLoadingNextLevel = true;
+                if (unlockableItem == null)
+                {
+                    StartCoroutine(LoadNextLevel());
+                    isLoadingNextLevel = true;
+                }
+                else
+                {
+                    unlockableItem.SetActive(true);
+                    Destroy(this);
+                }
             }
         }
     }
