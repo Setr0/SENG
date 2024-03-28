@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject gameoverPanel;
     [SerializeField] AudioSource jumpSound;
     [SerializeField] AudioSource attackSound;
+    [SerializeField] AudioSource axeSound;
     [SerializeField] AudioSource hittedSound;
     [SerializeField] AudioSource itemSound;
     [SerializeField] AudioSource deathSound;
@@ -204,6 +205,7 @@ public class PlayerController : MonoBehaviour
             if (transform.localEulerAngles.y == 180)
                 newAxe.GetComponent<Axe>().direction = new Vector2(-1, 0);
             canThrowAxe = false;
+            axeSound.Play();
             StartCoroutine(ThrowAxeDelay());
         }
     }

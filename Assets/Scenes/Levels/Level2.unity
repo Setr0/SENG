@@ -513,6 +513,7 @@ MonoBehaviour:
   - We same same ppl , u confirm GG!
   nextLevel: Level3
   isActive: 0
+  unlockableItem: {fileID: 0}
 --- !u!4 &221646392
 Transform:
   m_ObjectHideFlags: 0
@@ -1213,7 +1214,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3147583, y: 2.39148, z: -10}
+  m_LocalPosition: {x: 2.317502, y: 2.39148, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -105425,15 +105426,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 127206171686455257, guid: c5c7f1d59881c534eaafacc155d0a84a, type: 3}
       propertyPath: m_Name
-      value: SengBoss
+      value: EVIL SENG
       objectReference: {fileID: 0}
     - target: {fileID: 3448854078059773120, guid: c5c7f1d59881c534eaafacc155d0a84a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.102
       objectReference: {fileID: 0}
     - target: {fileID: 3448854078059773120, guid: c5c7f1d59881c534eaafacc155d0a84a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.125
+      value: 0.622
       objectReference: {fileID: 0}
     - target: {fileID: 3448854078059773120, guid: c5c7f1d59881c534eaafacc155d0a84a, type: 3}
       propertyPath: m_LocalPosition.z

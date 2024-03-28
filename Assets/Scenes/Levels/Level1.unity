@@ -499,6 +499,7 @@ MonoBehaviour:
   - We will be back,.......SAC4L !!!
   nextLevel: Level2
   isActive: 0
+  unlockableItem: {fileID: 0}
 --- !u!4 &221646392
 Transform:
   m_ObjectHideFlags: 0
@@ -1315,7 +1316,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6561718, y: 0.30108, z: -10}
+  m_LocalPosition: {x: 1.6562047, y: 0.30108, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5290,7 +5291,7 @@ Transform:
   m_GameObject: {fileID: 801969512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0000002, y: 0.25000024, z: -10}
+  m_LocalPosition: {x: -1.0000005, y: 0.25000024, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
